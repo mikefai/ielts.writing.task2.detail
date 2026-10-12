@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task 2 Decoded — IELTS Academic Writing Masterclass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101E33;
+  --ink-2:#1B2F4D;
+  --paper:#FFFEFB;
+  --paper-2:#F2EEDF;
+  --line:#E2DACA;
+  --green:#16493A;
+  --green-soft:#E3EDE6;
+  --gold:#C9A227;
+  --gold-soft:#FFF3C4;
+  --red:#C0392B;
+  --red-soft:#FBE4DE;
+  --blue:#2B5EA7;
+  --blue-soft:#E2ECFA;
+  --hl-yellow:#FFC93C;
+  --radius:18px;
+  --shadow:0 18px 50px rgba(16,30,51,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--hl-yellow)}
+a{color:inherit}
+.mono{font-family:'IBM Plex Mono',monospace}
+.serif{font-family:'Fraunces',serif}
+
+/* progress */
+#progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--green),var(--gold));width:0;z-index:99}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,254,251,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1220px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700}
+.brand-mark{width:36px;height:36px;border-radius:10px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:700;font-size:19px}
+.brand small{display:block;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.6}
+.nav{display:flex;gap:18px;font-size:14px;font-weight:600}
+.nav a{text-decoration:none;opacity:.7}.nav a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;transition:.2s}
+.btn-dark{background:var(--ink);color:#fff}.btn-dark:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-gold{background:var(--hl-yellow);color:var(--ink)}
+.btn-ghost{background:transparent;border:1.5px solid var(--line)}
+
+/* hero */
+.hero{max-width:1220px;margin:0 auto;padding:56px 24px 32px;display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:999px}
+.eyebrow i{width:8px;height:8px;background:#3DD68C;border-radius:50%;display:inline-block;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(44px,6vw,78px);line-height:.95;letter-spacing:-.03em;margin:20px 0 16px}
+.hero h1 em{font-style:italic;font-weight:600;background:linear-gradient(180deg,transparent 62%,var(--hl-yellow) 62%);padding:0 6px}
+.hero p.lead{font-size:19px;max-width:560px;opacity:.78}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}
+.stat{border:1.5px solid var(--ink);border-radius:14px;padding:14px;background:#fff;position:relative}
+.stat b{font-family:'Fraunces',serif;font-size:30px;display:block;line-height:1}
+.stat span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.65}
+.stat:nth-child(2){background:var(--ink);color:#fff;border-color:var(--ink)}
+.stat:nth-child(3){background:var(--gold-soft)}
+.stat:nth-child(4){background:var(--green-soft)}
+
+/* exam card */
+.exam-card{background:#fff;border:1.5px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);position:sticky;top:76px}
+.exam-head{background:var(--ink);color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.timer-pill{background:#fff;color:var(--ink);padding:6px 14px;border-radius:999px;font-weight:700;font-size:14px}
+.exam-body{padding:22px}
+.exam-body h3{font-family:'Fraunces',serif;margin:0 0 8px;font-size:22px}
+.exam-body p{font-size:15px;background:var(--paper-2);border-left:4px solid var(--gold);padding:12px 14px;border-radius:0 12px 12px 0}
+.exam-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.mini-timer{display:flex;gap:10px;align-items:center;margin-top:16px;background:var(--ink);color:#fff;border-radius:14px;padding:12px 14px}
+.mini-timer button{background:var(--hl-yellow);border:0;border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer}
+#timerDisplay{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600}
+
+/* layout */
+.wrap{max-width:1220px;margin:0 auto;padding:0 24px}
+.section{padding:56px 0;border-top:2px dashed var(--line)}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px;flex-wrap:wrap}
+.sec-num{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:600}
+.sec-head h2{font-family:'Fraunces',serif;font-size:clamp(30px,4vw,48px);line-height:1;margin:6px 0;letter-spacing:-.02em}
+.sec-head p{max-width:560px;opacity:.72;font-size:17px}
+
+/* criteria */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.crit{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:22px;position:relative;transition:.2s}
+.crit:hover{border-color:var(--ink);transform:translateY(-4px);box-shadow:var(--shadow)}
+.crit-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:12px}
+.crit h3{margin:0 0 6px;font-size:17px}
+.crit p{font-size:14px;opacity:.75;margin:0 0 10px}
+.crit ul{margin:0;padding-left:18px;font-size:13.5px}
+.crit .weight{font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--ink);color:#fff;display:inline-block;padding:3px 10px;border-radius:999px;margin-top:10px}
+
+/* tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{border:1.5px solid var(--line);background:#fff;padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer}
+.tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.qpanel{display:none;background:#fff;border:1.5px solid var(--ink);border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+.qpanel.active{display:block}
+.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:980px){.q-grid{grid-template-columns:1fr}}
+.qpanel h3{font-family:'Fraunces',serif;font-size:26px;margin:0 0 8px}
+.q-example{background:var(--paper-2);border-radius:14px;padding:16px;font-style:italic;border:1px dashed var(--gold)}
+.q-struct{background:var(--ink);color:#fff;border-radius:14px;padding:18px;font-size:14px}
+.q-struct code{font-family:'IBM Plex Mono',monospace;background:rgba(255,255,255,.12);padding:2px 6px;border-radius:6px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.badge{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:999px;border:1.5px solid var(--ink);background:#fff;font-weight:600}
+.badge.hot{background:var(--red-soft);border-color:var(--red);color:#7A1F15}
+.badge.mid{background:var(--gold-soft);border-color:var(--gold)}
+.badge.easy{background:var(--green-soft);border-color:var(--green)}
+.signal-box{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13.5px;margin:12px 0}
+.signal-box b{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.sig{ display:inline-block;background:var(--ink);color:#fff;padding:2px 9px;border-radius:999px;font-size:12.5px;margin:3px 4px 0 0;font-weight:600}
+.trap{background:#FFF1F1;border:1.5px solid #E8AFA6;border-radius:12px;padding:12px 14px;font-size:13.5px;margin:12px 0;color:#5E1A10}
+.trap b{color:#7A1F15}
+.para-map{margin:12px 0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
+.para-map .row{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;padding:10px 12px;font-size:13px;border-top:1px solid rgba(255,255,255,.12)}
+.para-map .row:first-child{border-top:0}
+.para-map .pn{font-family:'IBM Plex Mono',monospace;font-weight:700;background:var(--hl-yellow);color:var(--ink);border-radius:8px;text-align:center;padding:4px 0;font-size:12px}
+.para-map .wc{font-family:'IBM Plex Mono',monospace;font-size:11px;opacity:.65;white-space:nowrap}
+.model-intro{background:var(--blue-soft);border:1px solid #B9CDED;border-radius:12px;padding:12px 14px;font-size:14px;margin:12px 0}
+.model-intro b{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.thesis-list{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.thesis-list li{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:9px 12px;font-size:13.5px;cursor:pointer}
+.thesis-list li:hover{background:rgba(255,201,60,.18)}
+.thesis-list li span{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--hl-yellow);display:block;letter-spacing:.06em}
+.plan-box{background:var(--paper-2);border-radius:12px;padding:12px 14px;font-size:13.5px;margin-top:12px;border:1px dashed var(--gold)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.vs div{border-radius:10px;padding:10px 12px;font-size:13px}
+.vs .bad{background:#FFF1F1;border:1px solid #E8AFA6}
+.vs .good{background:#EAF6EE;border:1px solid #8CC09A}
+.quiz{margin-top:20px;background:var(--ink);color:#fff;border-radius:18px;padding:22px}
+.quiz h4{font-family:'Fraunces',serif;font-size:22px;margin:0 0 4px}
+.quiz p{font-size:14px;opacity:.75;margin:0 0 14px}
+.quiz-q{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:14px;margin-bottom:12px}
+.quiz-q p{color:#fff;opacity:1;font-style:italic}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.quiz-opts button{border-radius:999px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer}
+.quiz-opts button:hover{background:var(--hl-yellow);color:var(--ink);border-color:var(--hl-yellow)}
+.quiz-opts button.correct{background:#3DD68C;color:#06281C;border-color:#3DD68C}
+.quiz-opts button.wrong{background:var(--red);border-color:var(--red)}
+.quiz-feedback{font-size:13px;margin-top:8px;min-height:20px;font-weight:600}
+details.sbs{margin-top:12px;background:#fff;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+details.sbs summary{cursor:pointer;padding:13px 15px;font-weight:800;font-size:14px;background:var(--paper-2);list-style:none;display:flex;align-items:center;gap:10px}
+details.sbs summary::-webkit-details-marker{display:none}
+details.sbs summary:before{content:"+";width:26px;height:26px;flex-shrink:0;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800}
+details.sbs[open] summary:before{content:"–";background:var(--green)}
+details.sbs ol{margin:0;padding:0;list-style:none;counter-reset:sbs}
+details.sbs ol>li{counter-increment:sbs;padding:13px 15px 13px 58px;position:relative;border-top:1px dashed var(--line);font-size:13.8px}
+details.sbs ol>li:before{content:"S" counter(sbs);position:absolute;left:12px;top:13px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;background:var(--ink);color:#fff;padding:3px 7px;border-radius:7px}
+details.sbs .role{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-bottom:3px}
+details.sbs .ex{display:block;background:#F7F9FD;border:1px solid #D4DEEE;border-radius:8px;padding:8px 10px;margin:6px 0;font-style:italic;color:#1B2F4D}
+details.sbs .why{display:block;font-size:12.8px;opacity:.72}
+.role.r-intro{color:var(--blue)}.role.r-body{color:var(--green)}.role.r-conc{color:#8A6D00}
+details.sbs ol>li.body2-li:before{background:var(--green)}
+
+/* blueprint */
+.blueprint{display:grid;grid-template-columns:280px 1fr;gap:20px}
+.steps{display:flex;flex-direction:column;gap:12px}
+.step-btn{text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer}
+.step-btn.active{border-color:var(--ink);background:var(--ink);color:#fff}
+.step-btn b{display:block;font-size:15px}.step-btn span{font-size:13px;opacity:.7}
+.blue-detail{background:#fff;border:1.5px solid var(--ink);border-radius:20px;padding:28px;min-height:320px}
+.blue-detail h3{font-family:'Fraunces',serif;font-size:30px;margin:0}
+.formula{font-family:'IBM Plex Mono',monospace;background:var(--gold-soft);border:1px solid var(--gold);padding:10px 14px;border-radius:10px;margin:14px 0;font-size:14px}
+.starter-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.starter-chips span{background:var(--blue-soft);border:1px solid #B9CDED;padding:6px 12px;border-radius:999px;font-size:13px;cursor:pointer}
+.starter-chips span:hover{background:var(--hl-yellow)}
+
+/* annotated essay */
+.essay-layout{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+.essay-paper{background:#fff;border:1.5px solid var(--ink);border-radius:20px;padding:32px;box-shadow:var(--shadow);font-size:16.5px;line-height:1.85;position:relative}
+.essay-paper:before{content:"CANDIDATE 042 • BAND 9.0";font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;background:var(--ink);color:#fff;padding:6px 12px;border-radius:999px;position:absolute;top:-14px;left:24px}
+mark{padding:1px 5px;border-radius:5px;cursor:help;transition:.15s;border-bottom:2px solid transparent}
+mark.tr{background:#D8EBFF;border-bottom-color:var(--blue)}
+mark.cc{background:#DDF3E3;border-bottom-color:var(--green)}
+mark.lr{background:#FFF0B8;border-bottom-color:var(--gold)}
+mark.gra{background:#FBDCD4;border-bottom-color:var(--red)}
+mark.dim{opacity:.25}
+.layer-toggles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.layer-toggles button{border-radius:999px;border:1.5px solid var(--ink);padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;background:#fff}
+.layer-toggles button.on{color:#fff}
+.layer-toggles button[data-layer="tr"].on{background:var(--blue)}
+.layer-toggles button[data-layer="cc"].on{background:var(--green)}
+.layer-toggles button[data-layer="lr"].on{background:#8A6D00}
+.layer-toggles button[data-layer="gra"].on{background:var(--red)}
+.margin-notes{background:var(--ink);color:#E8EAF0;border-radius:20px;padding:22px;position:sticky;top:76px}
+.margin-notes h4{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--hl-yellow);margin:0 0 12px}
+.note{border-left:3px solid var(--hl-yellow);padding:8px 12px;margin-bottom:12px;background:rgba(255,255,255,.06);border-radius:0 10px 10px 0;font-size:14px}
+.note b{color:#fff}
+
+/* vocab */
+.vocab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.vocab-card{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:20px}
+.vocab-card h4{margin:0 0 12px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.swap{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px dashed var(--line);font-size:14px}
+.swap s{opacity:.5}.swap strong{color:var(--green)}
+.swap .arrow{background:var(--ink);color:#fff;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:14px}
+
+/* mistakes */
+.sins{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.sin{display:flex;gap:14px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px}
+.sin-num{width:42px;height:42px;flex-shrink:0;border-radius:50%;background:var(--red-soft);border:1.5px solid var(--red);display:grid;place-items:center;font-weight:800;color:var(--red)}
+.sin p{margin:4px 0 0;font-size:14px;opacity:.78}
+.sin code{display:block;background:#FFF1F1;border:1px solid #E8AFA6;padding:8px 10px;border-radius:8px;margin-top:8px;font-size:13px;color:#7A1F15}
+.sin code.fix{background:#EAF6EE;border-color:#8CC09A;color:#123F26}
+
+/* tools */
+.tools{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.tool-card{background:#fff;border:1.5px solid var(--ink);border-radius:20px;padding:22px}
+.tool-card h3{font-family:'Fraunces',serif;margin:0 0 8px;font-size:22px}
+textarea{width:100%;min-height:160px;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-family:inherit;font-size:15px;resize:vertical}
+.counter-stats{display:flex;gap:12px;margin-top:10px}
+.counter-stats div{flex:1;background:var(--paper-2);border-radius:10px;padding:10px;text-align:center}
+.counter-stats b{font-size:22px;font-family:'Fraunces',serif;display:block}
+.check label{display:flex;gap:10px;align-items:start;background:var(--paper-2);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:14px;cursor:pointer}
+.check input{margin-top:4px;accent-color:var(--green);width:18px;height:18px}
+#scoreBar{height:14px;background:#EEE;border-radius:999px;overflow:hidden;margin-top:10px}
+#scoreFill{height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold),var(--green));transition:.4s}
+
+/* footer */
+footer{background:var(--ink);color:#CBD3E2;margin-top:40px;border-radius:28px 28px 0 0}
+.foot-in{max-width:1220px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
+footer h2{font-family:'Fraunces',serif;color:#fff;font-size:36px;margin:0 0 10px}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+@media(max-width:980px){
+  .hero,.qpanel.active,.essay-layout,.blueprint,.foot-in{grid-template-columns:1fr}
+  .grid4,.vocab-grid,.tools{grid-template-columns:1fr 1fr}
+  .exam-card{position:static}
+  .nav{display:none}
+}
+@media(max-width:620px){.grid4,.vocab-grid,.tools,.sins,.hero-stats{grid-template-columns:1fr}}
+:focus-visible{outline:3px solid var(--hl-yellow);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand"><div class="brand-mark">T2</div><div>Task 2 Decoded<small>IELTS Academic Writing</small></div></div>
+    <nav class="nav">
+      <a href="#marking">Marking</a><a href="#types">Question types</a><a href="#blueprint">Blueprint</a><a href="#sample">Band 9 sample</a><a href="#toolkit">Toolkit</a>
+    </nav>
+    <a class="btn btn-dark" href="#toolkit">Start writing →</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <span class="eyebrow"><i></i> Academic Writing • Task 2 • 40 minutes</span>
+    <h1>The 40-minute essay, <em>decoded.</em></h1>
+    <p class="lead">Task 2 is worth <b>twice</b> Task 1. Examiners don't reward big words — they reward a clear position, logical paragraphs, and error-free sentences. This page teaches that system.</p>
+    <div class="hero-stats">
+      <div class="stat"><b>250+</b><span>words minimum</span></div>
+      <div class="stat"><b>40<span style="font-size:16px"> min</span></b><span>suggested time</span></div>
+      <div class="stat"><b>66%</b><span>of writing score</span></div>
+      <div class="stat"><b>4</b><span>band criteria</span></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="#blueprint" class="btn btn-dark">Learn the 4-paragraph formula</a>
+      <a href="#sample" class="btn btn-ghost">See a Band 9 essay</a>
+    </div>
+    <p class="mono" style="font-size:12.5px;margin-top:14px;opacity:.6">ACADEMIC & GENERAL TRAINING TASK 2 ARE THE SAME FORMAT — THIS GUIDE WORKS FOR BOTH.</p>
+  </div>
+  <div class="exam-card">
+    <div class="exam-head"><span>◉ Official-style prompt</span><span class="timer-pill" id="heroTimerLabel">40:00</span></div>
+    <div class="exam-body">
+      <h3>Try reading like an examiner</h3>
+      <p><b>Some people believe that unpaid community service should be a compulsory part of high school programmes. To what extent do you agree or disagree?</b></p>
+      <p style="background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);font-size:14px">First job: underline the <b>topic</b> (unpaid community service), the <b>scope</b> (high school programmes), and the <b>instruction</b> (agree / disagree → opinion essay). If you answer the wrong question type, Task Response caps at Band 5.</p>
+      <div class="exam-actions">
+        <button class="btn btn-gold" onclick="document.getElementById('types').scrollIntoView()">Identify the 5 types ↓</button>
+      </div>
+      <div class="mini-timer">
+        <div style="flex:1"><div class="mono" style="font-size:11px;letter-spacing:.12em;opacity:.7">EXAM TIMER</div><div id="timerDisplay">40:00</div></div>
+        <button id="timerBtn" onclick="toggleTimer()">Start</button>
+        <button onclick="resetTimer()" style="background:transparent;color:#fff;border:1px solid #fff">Reset</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+<!-- MARKING -->
+<section class="section" id="marking">
+  <div class="sec-head">
+    <div><div class="sec-num">01 — How you are marked</div><h2>Four judges, equal votes.</h2></div>
+    <p>Each criterion is 25%. Most students fail because they obsess over vocabulary and ignore Task Response and Cohesion — the two easiest to fix.</p>
+  </div>
+  <div class="grid4">
+    <div class="crit"><div class="crit-icon" style="background:var(--blue-soft)">🎯</div><h3>Task Response</h3><p>Did you answer <i>exactly</i> what was asked with a clear position throughout?</p><ul><li>Paraphrase + thesis in intro</li><li>Extend every idea, don't list</li><li>Clear opinion if asked</li></ul><span class="weight">25% • TR</span></div>
+    <div class="crit"><div class="crit-icon" style="background:var(--green-soft)">🔗</div><h3>Coherence & Cohesion</h3><p>Can a tired examiner follow you without re-reading?</p><ul><li>One central idea per paragraph</li><li>Linkers + referencing (this, these)</li><li>Logical progression</li></ul><span class="weight">25% • CC</span></div>
+    <div class="crit"><div class="crit-icon" style="background:var(--gold-soft)">📚</div><h3>Lexical Resource</h3><p>Precise, natural collocations — not rare words forced in.</p><ul><li>Topic collocations</li><li>Less common phrases, used correctly</li><li>Correct spelling + word form</li></ul><span class="weight">25% • LR</span></div>
+    <div class="crit"><div class="crit-icon" style="background:var(--red-soft)">✍️</div><h3>Grammar Range & Accuracy</h3><p>Mix simple + complex sentences with few errors.</p><ul><li>Complex: relative, conditional, passive</li><li>Punctuation matters</li><li>Errors must not block meaning</li></ul><span class="weight">25% • GRA</span></div>
+  </div>
+</section>
+
+<!-- TYPES -->
+<section class="section" id="types">
+  <div class="sec-head">
+    <div><div class="sec-num">02 — The five question types</div><h2>Spot the type in 10 seconds.</h2></div>
+    <p>Click each tab. Your structure changes slightly per type — get this wrong and Task Response caps at Band 5. Each card gives you: signal words, paragraph map, thesis templates, a model intro, and the trap to avoid.</p>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-q="opinion">1. Opinion</button>
+    <button class="tab" data-q="discussion">2. Discussion</button>
+    <button class="tab" data-q="adv">3. Advantages / Disadvantages</button>
+    <button class="tab" data-q="problem">4. Problem / Solution</button>
+    <button class="tab" data-q="two">5. Two-part question</button>
+  </div>
+
+  <div class="qpanel active" id="q-opinion">
+    <div class="q-grid">
+    <div>
+      <h3>1. Opinion — Agree / Disagree</h3>
+      <div class="badges"><span class="badge hot">★ Most common ~40%</span><span class="badge easy">Easiest to master</span></div>
+      <div class="q-example">“Some people think university education should be free for all students. To what extent do you agree or disagree?”</div>
+      <div class="signal-box"><b>🔍 Signal words — spot it by:</b><br><span class="sig">To what extent do you agree</span><span class="sig">Do you agree or disagree?</span><span class="sig">Do you think…?</span></div>
+      <div class="model-intro"><b>✦ Model intro (41 words)</b><br><i>“In recent years, the cost of higher education has sparked heated debate. While some insist tuition should be entirely state-funded, I strongly disagree, as free degrees would strain public budgets and devalue qualifications.”</i><br><span class="mono" style="font-size:12px;opacity:.7">Sentence 1 background → Sentence 2 paraphrase → Sentence 3 opinion + 2 reasons preview.</span></div>
+      <div class="trap"><b>⚠ Trap:</b> sitting on the fence. “There are both pros and cons, it depends” with no verdict = TR Band 5. Pick one side. A <i>qualified</i> position (“I largely agree, although…”) is fine — but state it in the intro and never wobble.</div>
+      <div class="plan-box"><b>📝 5-min plan example:</b> Side = <b>Disagree</b>. Body 1: burden on taxpayers → Sweden/Norway cuts? Body 2 (stronger): devalues degrees → graduate oversupply, employers filter harder. Concession folded into Body 2, rebutted.</div>
+      <div class="vs"><div class="bad"><b>✕ Band 5 thesis</b><br>“This essay will talk about free university and give my opinion.” (vague, no position)</div><div class="good"><b>✓ Band 8 thesis</b><br>“I strongly disagree that… because… and…” (position + map)</div></div>
+      <details class="sbs"><summary>📝 Sentence-by-sentence build — Opinion essay (15 sentences, 273 words)</summary><ol>
+        <li><span class="role r-intro">S1 — Background (general, no opinion)</span>Set the scene in one neutral sentence.<span class="ex">“In recent years, the rising cost of higher education has sparked heated debate.”</span><span class="why">Why: shows range with present perfect + collocation “sparked debate”. Never copy the question here.</span></li>
+        <li><span class="role r-intro">S2 — Paraphrase the question</span>Rewrite the claim with synonyms.<span class="ex">“While some insist that university tuition should be entirely state-funded…”</span><span class="why">“Some people think… should be free” → “some insist… entirely state-funded”. Proves paraphrase skill for TR/LR.</span></li>
+        <li><span class="role r-intro">S3 — Thesis: verdict + 2 reasons map</span>State your side + preview both body ideas.<span class="ex">“I strongly disagree, as free degrees would cripple public budgets and devalue qualifications.”</span><span class="why">Examiner now knows your position AND the essay map (budgets = ¶2, devalue = ¶3). This one sentence locks TR Band 7+.</span></li>
+        <li><span class="role r-body">S4 — Body 1 topic sentence (Reason 1, weaker)</span>One clear idea only.<span class="ex">“Firstly, fully subsidised tuition would place an unsustainable burden on taxpayers.”</span><span class="why">“Firstly” + “unsustainable burden” = CC topic signal + LR collocation. One idea per paragraph.</span></li>
+        <li><span class="role r-body">S5 — Explain the mechanism</span>Answer “why is this true?”<span class="ex">“Universities are enormously expensive to run, and the shortfall would have to come from general taxation.”</span><span class="why">Extends the idea instead of listing a new one — this extending is what separates Band 6 from 7.</span></li>
+        <li><span class="role r-body">S6 — Deepen with consequence</span>Push one step further: so what?<span class="ex">“This would force cuts to healthcare and schools, or steep tax rises for ordinary workers.”</span><span class="why">Chain logic (free uni → tax rise → cuts) shows developed reasoning, not a list.</span></li>
+        <li><span class="role r-body">S7 — Concrete example</span>Name a place, study, or number (plausible invention is allowed).<span class="ex">“For instance, when Germany experimented with zero tuition, several states reintroduced fees after maintenance backlogs soared.”</span><span class="why">“For instance” + specific detail = TR extension. Keep it to 1–2 sentences.</span></li>
+        <li><span class="role r-body">S8 — Link back to your position</span>Close the paragraph on-message.<span class="ex">“Hence, universal free tuition is fiscally reckless rather than fair.”</span><span class="why">“Hence” + judgment echoing “disagree” keeps every paragraph tied to the thesis.</span></li>
+        <li><span class="role r-body">S9 — Body 2 concession (one line, then pivot)</span>Steel-man the other side briefly.<span class="ex">“Admittedly, free access could widen participation among poor students.”</span><span class="why">One-line concession shows maturity (Band 8 TR). Keep it short — this paragraph is still YOUR side.</span></li>
+        <li><span class="role r-body">S10 — Rebut + Reason 2 topic (strongest)</span>Neutralise the concession, land your best punch.<span class="ex">“However, this goal is better met by means-tested grants, because blanket subsidies mainly benefit the middle class; more importantly, free degrees erode the value of qualifications.”</span><span class="why">“However” + superlative “more importantly” signals your strongest card is coming.</span></li>
+        <li><span class="role r-body">S11 — Explain why devaluation happens</span><span class="ex">“When everyone holds a degree, employers can no longer distinguish ability, so they demand master's degrees for entry-level jobs.”</span><span class="why">Cause → effect chain. Present-simple + “so” clause = GRA range without risk.</span></li>
+        <li><span class="role r-body">S12 — Example with result</span><span class="ex">“South Korea, where over 70% of young adults graduate, now faces graduate unemployment above 10% despite near-universal degrees.”</span><span class="why">Country + statistic = credible support in one sentence. Don't over-explain data.</span></li>
+        <li><span class="role r-body">S13 — Final link: tie both reasons to verdict</span><span class="ex">“These credential inflation effects prove that ‘free for all’ helps few and harms many.”</span><span class="why">Echoes S3's “devalue qualifications” with new words — cohesion through paraphrase, not repetition.</span></li>
+        <li><span class="role r-conc">S14 — Conclusion: restate verdict + compress reasons</span>No new ideas.<span class="ex">“In conclusion, despite its egalitarian appeal, I remain convinced that blanket free tuition is unaffordable and counterproductive.”</span><span class="why">“Despite” concession + “remain convinced” restates S3 with fresh vocabulary.</span></li>
+        <li><span class="role r-conc">S15 — Close (recommendation, optional)</span>One forward-looking line.<span class="ex">“Targeted scholarships, not universal subsidies, are the fairer path.”</span><span class="why">Optional Band 8 touch — a recommendation, not a new argument.</span></li>
+      </ol></details>
+    </div>
+    <div class="q-struct"><b class="mono" style="color:var(--hl-yellow)">PARAGRAPH MAP — 270 WORDS</b>
+      <div class="para-map">
+        <div class="row"><span class="pn">¶1</span><span><b>Paraphrase + thesis.</b> End with your verdict + 2 reasons.</span><span class="wc">45 w</span></div>
+        <div class="row"><span class="pn">¶2</span><span><b>Reason 1</b> (weaker). Point → explain → example → link.</span><span class="wc">95 w</span></div>
+        <div class="row"><span class="pn">¶3</span><span><b>Reason 2</b> (strongest) + 1-line concession & rebuttal.</span><span class="wc">95 w</span></div>
+        <div class="row"><span class="pn">¶4</span><span><b>Restate verdict</b> in new words. No new ideas.</span><span class="wc">35 w</span></div>
+      </div>
+      <b class="mono" style="color:var(--hl-yellow);font-size:12px">THESIS TEMPLATES — CLICK TO COPY</b>
+      <ul class="thesis-list">
+        <li onclick="copyT(this)"><span>FULL AGREEMENT</span>While some argue that X is harmful, I strongly agree that… because… and…</li>
+        <li onclick="copyT(this)"><span>FULL DISAGREEMENT</span>Despite claims that…, I firmly disagree, since… would… and…</li>
+        <li onclick="copyT(this)"><span>QUALIFIED (Band 8+ only)</span>Although X has some merit, I largely agree that… However, … must be regulated.</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+
+  <div class="qpanel" id="q-discussion">
+    <div class="q-grid">
+    <div>
+      <h3>2. Discussion — Both views + your opinion</h3>
+      <div class="badges"><span class="badge hot">★ Very common ~30%</span><span class="badge mid">TR trap risk: high</span></div>
+      <div class="q-example">“Some believe technology makes us more social, others think it isolates us. Discuss both views and give your own opinion.”</div>
+      <div class="signal-box"><b>🔍 Signal words — spot it by:</b><br><span class="sig">Discuss both views</span><span class="sig">Discuss both sides</span><span class="sig">…and give your opinion</span></div>
+      <div class="model-intro"><b>✦ Model intro (44 words)</b><br><i>“Digital connectivity has divided opinion. Some claim social media deepens relationships, while others believe it erodes face-to-face contact. This essay will examine both perspectives before concluding that, on balance, the isolating effects outweigh the benefits.”</i></div>
+      <div class="trap"><b>⚠ Trap:</b> giving your opinion too early or only discussing one side. Body 1 must be fair to View A <i>without</i> “I think”. Save your verdict for Body 2's second half + conclusion. Skip your opinion entirely = TR capped at 6.</div>
+      <div class="plan-box"><b>📝 5-min plan:</b> Body 1 (View A — connection): video calls → migrants, grandparents; example: Zoom, migrant workers. Body 2 (View B + my stance): curated feeds replace real talk → loneliness stats; verdict: isolation stronger.</div>
+      <div class="vs"><div class="bad"><b>✕ Band 5</b><br>“I think phones are bad. Also some people like them.” (one-sided, opinion everywhere)</div><div class="good"><b>✓ Band 8</b><br>Body 1 purely View A, Body 2 View B + “In my view, the latter is more convincing because…”</div></div>
+      <details class="sbs"><summary>📝 Sentence-by-sentence build — Discussion essay (15 sentences, 278 words)</summary><ol>
+        <li><span class="role r-intro">S1 — Background</span><span class="ex">“Digital connectivity has transformed how people maintain relationships.”</span><span class="why">Neutral scene-setter. Present perfect shows GRA range immediately.</span></li>
+        <li><span class="role r-intro">S2 — Paraphrase View A</span><span class="ex">“Some claim that social media and messaging apps deepen social bonds…”</span><span class="why">“Some believe technology makes us more social” → new words. Keep both views in one or two sentences.</span></li>
+        <li><span class="role r-intro">S3 — Paraphrase View B + outline (NO opinion yet)</span><span class="ex">“…while others believe constant screen time erodes face-to-face contact. This essay will examine both perspectives before concluding that the isolating effects outweigh the benefits.”</span><span class="why">The golden discussion formula. Stating your verdict here is allowed (“before concluding that…”) — blurting “I think” in slang form is not. This phrasing keeps it academic.</span></li>
+        <li><span class="role r-body">S4 — Body 1 topic: View A fairly</span>Argue the side you may disagree with, honestly.<span class="ex">“On the one hand, supporters point out that technology bridges vast distances.”</span><span class="why">“On the one hand” + “supporters point out” = objective voice. No “I” in this paragraph.</span></li>
+        <li><span class="role r-body">S5 — Explain how</span><span class="ex">“Migrant workers can video-call their children nightly, and elderly grandparents can join family events virtually.”</span><span class="why">Two concrete images in one sentence — specific beats abstract (“people communicate more”).</span></li>
+        <li><span class="role r-body">S6 — Deepen: why it matters</span><span class="ex">“This continuity preserves emotional bonds that distance would otherwise sever.”</span><span class="why">Abstract payoff sentence (“preserves bonds”) lifts LR after concrete detail.</span></li>
+        <li><span class="role r-body">S7 — Example</span><span class="ex">“During the pandemic, for example, Zoom gatherings prevented complete social collapse for millions living alone.”</span><span class="why">Dated, verifiable example examiners recognise. One sentence is enough.</span></li>
+        <li><span class="role r-body">S8 — Summarise View A objectively</span><span class="ex">“Thus, advocates see digital tools as a lifeline rather than a threat.”</span><span class="why">“Thus, advocates see…” closes the view without endorsing it. Discipline = TR credit.</span></li>
+        <li><span class="role r-body">S9 — Body 2 topic: View B + YOUR stance flag</span><span class="ex">“On the other hand, critics argue that curated online interaction displaces genuine conversation, a concern I share.”</span><span class="why">“A concern I share” plants your verdict inside the topic sentence — exactly where examiners look.</span></li>
+        <li><span class="role r-body">S10 — Explain the harm mechanism</span><span class="ex">“Scrolling through highlight reels consumes hours that once went to neighbourhood talk, hobbies, and family meals.”</span><span class="why">Parallel list (“talk, hobbies, meals”) + contrast past vs present = strong CC + LR.</span></li>
+        <li><span class="role r-body">S11 — Evidence / authority</span><span class="ex">“A 2023 US Surgeon General advisory linked heavy social-media use among teens to doubled rates of reported loneliness.”</span><span class="why">Named source + number. Plausible invented stats are tolerated; absurd ones (“99.9% die”) are not.</span></li>
+        <li><span class="role r-body">S12 — Why View B is stronger (evaluation)</span><span class="ex">“In my view, this evidence is more compelling because virtual likes cannot replicate the empathy of physical presence.”</span><span class="why">“In my view… more compelling because…” = explicit evaluation. This sentence is the difference between TR 6 and 7.</span></li>
+        <li><span class="role r-body">S13 — Concede View A's limit, reassert</span><span class="ex">“While video calls help in emergencies, they are a thin substitute for daily community life.”</span><span class="why">“While…” concession + rebuttal in one sentence shows balance without fence-sitting.</span></li>
+        <li><span class="role r-conc">S14 — Conclusion: both views compressed + verdict</span><span class="ex">“In conclusion, although technology connects the distant, I believe it distances the near, and the net effect is isolation.”</span><span class="why">Parallel antithesis (“connects the distant / distances the near”) — memorable, academic, and verdict-clear.</span></li>
+        <li><span class="role r-conc">S15 — Final implication (no new argument)</span><span class="ex">“Schools and families should therefore protect screen-free time together.”</span><span class="why">Recommendation growing from your verdict, not a fresh idea.</span></li>
+      </ol></details>
+    </div>
+    <div class="q-struct"><b class="mono" style="color:var(--hl-yellow)">PARAGRAPH MAP — 275 WORDS</b>
+      <div class="para-map">
+        <div class="row"><span class="pn">¶1</span><span><b>Paraphrase both views + outline.</b> No opinion yet: <code>This essay will discuss…</code></span><span class="wc">45 w</span></div>
+        <div class="row"><span class="pn">¶2</span><span><b>View A</b> fairly (even if you disagree). 2-3 sentences + example.</span><span class="wc">95 w</span></div>
+        <div class="row"><span class="pn">¶3</span><span><b>View B + your stance.</b> “In my view, this argument is more persuasive because…”</span><span class="wc">100 w</span></div>
+        <div class="row"><span class="pn">¶4</span><span><b>Conclusion with verdict.</b> Summarise both, restate which wins.</span><span class="wc">35 w</span></div>
+      </div>
+      <b class="mono" style="color:var(--hl-yellow);font-size:12px">THESIS TEMPLATES — CLICK TO COPY</b>
+      <ul class="thesis-list">
+        <li onclick="copyT(this)"><span>NEUTRAL OPENER</span>This essay will discuss both perspectives before concluding that…</li>
+        <li onclick="copyT(this)"><span>LEANING A</span>While both arguments have merit, I believe the former view is more convincing because…</li>
+        <li onclick="copyT(this)"><span>LEANING B</span>Although X has some validity, I side with those who argue that…</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+
+  <div class="qpanel" id="q-adv">
+    <div class="q-grid">
+    <div>
+      <h3>3. Advantages / Disadvantages</h3>
+      <div class="badges"><span class="badge mid">Common ~15%</span><span class="badge mid">Two sub-types — read carefully</span></div>
+      <div class="q-example">“Working from home has become common. Do the advantages of this outweigh the disadvantages?”</div>
+      <div class="signal-box"><b>🔍 Signal words — spot it by:</b><br><span class="sig">Do the advantages outweigh…?</span><span class="sig">Discuss the advantages and disadvantages</span><span class="sig">Is this positive or negative?</span><br><span style="font-size:12.5px;opacity:.8">⚡ Sub-type A (“outweigh / positive?”) = you must <b>evaluate</b>. Sub-type B (“discuss adv & disadv”) = balanced, no verdict needed.</span></div>
+      <div class="model-intro"><b>✦ Model intro — outweigh type (43 words)</b><br><i>“Remote work has become the norm in many industries. While it offers flexibility, it also raises concerns about isolation. In my view, the benefits — higher productivity and inclusion — significantly outweigh the drawbacks.”</i></div>
+      <div class="trap"><b>⚠ Trap:</b> listing without weighing. “There are 3 advantages and 3 disadvantages” with no judgment = TR 6 max on outweigh questions. Use evaluation language: <i>more significant, primary vs secondary, outweigh, while minor…</i></div>
+      <div class="plan-box"><b>📝 5-min plan:</b> Adv: no commute → productivity (Stanford 13%); inclusion → rural/disabled access. Disadv: isolation, blurred boundaries. Verdict: adv stronger → give Body on winning side more weight + sharper example.</div>
+      <div class="vs"><div class="bad"><b>✕ Band 5-6</b><br>“There are advantages and disadvantages. In conclusion both exist.” (no evaluation)</div><div class="good"><b>✓ Band 8</b><br>“Although isolation is real, it is secondary and solvable; the productivity and inclusion gains are structural.”</div></div>
+      <details class="sbs"><summary>📝 Sentence-by-sentence build — Advantages outweigh essay (14 sentences, 271 words)</summary><ol>
+        <li><span class="role r-intro">S1 — Background</span><span class="ex">“Remote work has shifted from emergency measure to permanent norm in many industries.”</span><span class="why">“From X to Y” structure + precise noun “norm” = instant LR credit.</span></li>
+        <li><span class="role r-intro">S2 — Paraphrase both sides</span><span class="ex">“While it promises flexibility and lower costs, critics warn of loneliness and blurred boundaries.”</span><span class="why">One sentence, both sides, all paraphrased (“working from home” → “remote work”; “common” → “norm”).</span></li>
+        <li><span class="role r-intro">S3 — Verdict: which wins + why preview</span><span class="ex">“In my view, the advantages — higher output and wider inclusion — significantly outweigh the drawbacks.”</span><span class="why">For “outweigh” questions the verdict MUST be in the intro. Dash-inserted preview maps ¶2/¶3. “Significantly outweigh” is the exact evaluation verb examiners scan for.</span></li>
+        <li><span class="role r-body">S4 — Body 1 topic: weaker side (disadvantages) first</span><span class="ex">“Admittedly, home-based work carries genuine drawbacks.”</span><span class="why">Putting the weaker side first lets you finish strong. “Admittedly” = academic concession marker.</span></li>
+        <li><span class="role r-body">S5 — Disadvantage 1 + mechanism</span><span class="ex">“Junior staff, in particular, lose the corridor conversations and mentoring that offices provide, which can stall their development.”</span><span class="why">Specific group (“junior staff”) + relative clause = developed, not listed.</span></li>
+        <li><span class="role r-body">S6 — Disadvantage 2 + example</span><span class="ex">“Moreover, when the kitchen table becomes the desk, many find it hard to switch off; a UK survey found 42% of remote workers report longer hours.”</span><span class="why">“Moreover” second point + semi-colon + data. Two disadvantages in one paragraph is fine — this is the weaker side, keep it tight.</span></li>
+        <li><span class="role r-body">S7 — Concede-and-contain: why these are solvable</span><span class="ex">“Yet these costs are manageable through hybrid schedules and right-to-disconnect policies.”</span><span class="why">“Yet… manageable” shrinks the losing side before the reader meets your winner. Key outweigh move.</span></li>
+        <li><span class="role r-body">S8 — Body 2 topic: stronger side (advantages)</span><span class="ex">“The benefits, by contrast, are structural and far-reaching.”</span><span class="why">“By contrast… structural” explicitly ranks this side above ¶2 — evaluation language, not listing.</span></li>
+        <li><span class="role r-body">S9 — Advantage 1 + mechanism</span><span class="ex">“First, eliminating commutes returns roughly an hour a day, allowing deeper focus and quieter, self-designed workspaces.”</span><span class="why">Quantified mechanism (“an hour a day”) + cause-effect. Spend more sentences here than on ¶2.</span></li>
+        <li><span class="role r-body">S10 — Evidence for advantage 1</span><span class="ex">“To illustrate, Stanford's trial of 16,000 call-centre staff recorded a 13% productivity rise among home workers.”</span><span class="why">Famous study examiners know — safe, credible, one sentence.</span></li>
+        <li><span class="role r-body">S11 — Advantage 2: inclusion (stronger, moral weight)</span><span class="ex">“Second, and more importantly, remote roles open employment to disabled professionals, carers, and rural workers previously shut out of city jobs.”</span><span class="why">“More importantly” + triple group list escalates significance — outweigh essays must argue importance, not count points.</span></li>
+        <li><span class="role r-body">S12 — Why advantage 2 outweighs (explicit comparison)</span><span class="ex">“Unlike occasional loneliness, which firms can mitigate, this widening of opportunity reshapes who can earn a living — a far weightier gain.”</span><span class="why">“Unlike X… this…” direct comparison sentence. Without it, TR stays at 6.</span></li>
+        <li><span class="role r-conc">S13 — Conclusion verdict restated</span><span class="ex">“In conclusion, although isolation and overwork are real, I remain convinced the flexibility, productivity, and inclusion gains outweigh them.”</span><span class="why">“Although… I remain convinced” mirrors S3 with new adjectives. Both sides named, winner declared.</span></li>
+        <li><span class="role r-conc">S14 — Recommendation close</span><span class="ex">“Employers should therefore formalise hybrid policies rather than force a full return.”</span><span class="why">Practical payoff flowing from the verdict — not a new argument.</span></li>
+      </ol></details>
+    </div>
+    <div class="q-struct"><b class="mono" style="color:var(--hl-yellow)">PARAGRAPH MAP — OUTWEIGH TYPE</b>
+      <div class="para-map">
+        <div class="row"><span class="pn">¶1</span><span><b>Paraphrase + verdict.</b> State which side wins immediately.</span><span class="wc">45 w</span></div>
+        <div class="row"><span class="pn">¶2</span><span><b>Weaker side</b> (e.g. disadvantages). Acknowledge honestly.</span><span class="wc">90 w</span></div>
+        <div class="row"><span class="pn">¶3</span><span><b>Stronger side</b> (longer, better example) + why it matters more.</span><span class="wc">100 w</span></div>
+        <div class="row"><span class="pn">¶4</span><span><b>Evaluation restated:</b> “Therefore, … outweigh …”</span><span class="wc">35 w</span></div>
+      </div>
+      <b class="mono" style="color:var(--hl-yellow);font-size:12px">EVALUATION PHRASES — CLICK TO COPY</b>
+      <ul class="thesis-list">
+        <li onclick="copyT(this)"><span>VERDICT</span>In my view, the advantages significantly outweigh the disadvantages because…</li>
+        <li onclick="copyT(this)"><span>CONCEDE + OVERRULE</span>While the concern about… is legitimate, it is secondary compared to…</li>
+        <li onclick="copyT(this)"><span>BALANCED (sub-type B)</span>This essay will outline the main benefits and drawbacks of…</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+
+  <div class="qpanel" id="q-problem">
+    <div class="q-grid">
+    <div>
+      <h3>4. Problem / Solution — Causes, Effects, Fixes</h3>
+      <div class="badges"><span class="badge mid">Less common ~10%</span><span class="badge easy">Most predictable structure</span></div>
+      <div class="q-example">“Traffic congestion is a growing problem in many cities. What are the causes, and what solutions can you suggest?”</div>
+      <div class="signal-box"><b>🔍 Signal words — spot it by:</b><br><span class="sig">What are the causes / problems?</span><span class="sig">What solutions / measures?</span><span class="sig">What are the effects?</span><br><span style="font-size:12.5px;opacity:.8">Variants: causes + effects, problems + solutions, causes + solutions. Count the question marks — answer <b>all</b> of them.</span></div>
+      <div class="model-intro"><b>✦ Model intro (40 words)</b><br><i>“Gridlock now chokes most major cities. This is driven chiefly by car dependency and inadequate public transport. This essay will analyse these causes before proposing congestion pricing and transit investment as remedies.”</i></div>
+      <div class="trap"><b>⚠ Trap:</b> solutions that don't match your causes. If Cause = “too many cars”, Solution must cut car use — not “build more driving schools”. Examiners check the <i>link</i>. Mirror each cause with a fix.</div>
+      <div class="plan-box"><b>📝 5-min plan:</b> Causes: ① urban sprawl + cheap cars → car dependency ② underfunded buses → unreliable. Solutions: ① congestion charge (London −30%) ② dedicated bus lanes + subsidies. Each solution tags its cause.</div>
+      <div class="vs"><div class="bad"><b>✕ Band 5</b><br>Causes: pollution. Solutions: plant trees in schools. (mismatched, vague)</div><div class="good"><b>✓ Band 8</b><br>“Since the root cause is X, the most direct remedy is Y, as demonstrated by…”</div></div>
+      <details class="sbs"><summary>📝 Sentence-by-sentence build — Causes & Solutions essay (14 sentences, 274 words)</summary><ol>
+        <li><span class="role r-intro">S1 — Background: scale of problem</span><span class="ex">“Gridlock now chokes most major cities at rush hour.”</span><span class="why">Strong verb “chokes” + time marker “at rush hour” — vivid but academic. One punchy scene-setter.</span></li>
+        <li><span class="role r-intro">S2 — Paraphrase the task</span><span class="ex">“This congestion stems from deep-rooted transport habits and planning failures.”</span><span class="why">“Traffic congestion… growing problem” → “congestion stems from…”. Shows you can nominalise (congest = noun).</span></li>
+        <li><span class="role r-intro">S3 — Outline both jobs</span><span class="ex">“This essay will analyse two principal causes before proposing matching remedies.”</span><span class="why">“Will analyse… before proposing” promises Q1 then Q2 in order. “Matching” signals the cause↔solution link examiners reward.</span></li>
+        <li><span class="role r-body">S4 — Body 1 topic: Cause 1</span><span class="ex">“The primary driver is car dependency fuelled by sprawl and cheap credit.”</span><span class="why">Names the cause AND its roots in one sentence — depth from the start.</span></li>
+        <li><span class="role r-body">S5 — Explain mechanism + effect</span><span class="ex">“As suburbs spread, public transport becomes uneconomic, so families buy second cars, which flood arterial roads each morning.”</span><span class="why">“As… so… which…” chain: sprawl → no buses → more cars → jams. This causal chain IS the Band 7 skill.</span></li>
+        <li><span class="role r-body">S6 — Cause 2 + effect</span><span class="ex">“Compounding this, bus and metro networks in many cities are underfunded and unreliable, pushing even willing commuters back into cars.”</span><span class="why">“Compounding this” links cause 2 to cause 1 instead of listing. Present participle “pushing” adds GRA range.</span></li>
+        <li><span class="role r-body">S7 — Evidence / illustration</span><span class="ex">“In Jakarta, for instance, bus speeds average 12 km/h in peak hours, so ridership has fallen for five straight years.”</span><span class="why">City + number + trend. Concrete proof both causes are real.</span></li>
+        <li><span class="role r-body">S8 — Body 2 topic: solution principle (mirror the causes)</span><span class="ex">“Since both causes involve incentives to drive, the remedies must make driving costlier and transit better.”</span><span class="why">“Since…” explicitly ties solutions to YOUR stated causes — the matching examiners check for.</span></li>
+        <li><span class="role r-body">S9 — Solution 1 fixes Cause 1 + proof</span><span class="ex">“First, congestion pricing directly targets excess car use; London's charge cut central traffic by roughly 30% within three years.”</span><span class="why">Semi-colon joins remedy + proof. Named city + percentage = credible in 20 words.</span></li>
+        <li><span class="role r-body">S10 — How to spend the revenue (feasibility)</span><span class="ex">“Revenues should be ring-fenced for dedicated bus lanes and service frequency, addressing the reliability gap identified above.”</span><span class="why">“Ring-fenced” LR + “identified above” referencing back to ¶2 — textbook cohesion.</span></li>
+        <li><span class="role r-body">S11 — Solution 2 fixes Cause 2 + guard against objection</span><span class="ex">“Second, employers can stagger hours and expand remote days, flattening the peak; while this suits office staff best, even a 10% shift eases bottlenecks markedly.”</span><span class="why">“While…” concedes limits then quantifies impact anyway — mature, realistic proposals score higher than utopian ones.</span></li>
+        <li><span class="role r-body">S12 — Link: why these work together</span><span class="ex">“Together, the stick of pricing and the carrot of better options break the car-dependency cycle.”</span><span class="why">Idiom “stick and carrot” used correctly + “cycle” echoes S4's “dependency” — elegant closure of the body.</span></li>
+        <li><span class="role r-conc">S13 — Summary: compress causes + solutions</span><span class="ex">“In summary, congestion is driven by sprawl-induced car reliance and weak transit, best answered by pricing plus transit investment and flexible hours.”</span><span class="why">One sentence, all four elements, no new ideas. Noun phrases compress 200 words into 25.</span></li>
+        <li><span class="role r-conc">S14 — Final note (no opinion needed)</span><span class="ex">“Cities that pair charges with genuine alternatives will move fastest.”</span><span class="why">Forward-looking generalization — safe close for problem/solution essays where no opinion was asked.</span></li>
+      </ol></details>
+    </div>
+    <div class="q-struct"><b class="mono" style="color:var(--hl-yellow)">PARAGRAPH MAP — 270 WORDS</b>
+      <div class="para-map">
+        <div class="row"><span class="pn">¶1</span><span><b>Paraphrase + outline:</b> <code>This essay will analyse… before proposing…</code></span><span class="wc">45 w</span></div>
+        <div class="row"><span class="pn">¶2</span><span><b>Causes / problems</b> (2 causes, each + effect + mini-example).</span><span class="wc">100 w</span></div>
+        <div class="row"><span class="pn">¶3</span><span><b>Solutions</b> matched 1-to-1 to causes + feasibility/example.</span><span class="wc">100 w</span></div>
+        <div class="row"><span class="pn">¶4</span><span><b>Summary</b> of causes + solutions. No opinion needed.</span><span class="wc">30 w</span></div>
+      </div>
+      <b class="mono" style="color:var(--hl-yellow);font-size:12px">FRAME SENTENCES — CLICK TO COPY</b>
+      <ul class="thesis-list">
+        <li onclick="copyT(this)"><span>OUTLINE</span>This essay will examine the principal causes before outlining viable solutions.</li>
+        <li onclick="copyT(this)"><span>CAUSE → EFFECT</span>The primary driver is…, which in turn leads to…</li>
+        <li onclick="copyT(this)"><span>SOLUTION LINK</span>To tackle this, governments should…, as demonstrated in…</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+
+  <div class="qpanel" id="q-two">
+    <div class="q-grid">
+    <div>
+      <h3>5. Two-part / Direct questions</h3>
+      <div class="badges"><span class="badge mid">Unpredictable ~10%</span><span class="badge hot">Miss a part = TR 5</span></div>
+      <div class="q-example">“Many young people leave rural areas for cities. Why is this happening? Is it a positive or negative trend?”</div>
+      <div class="signal-box"><b>🔍 Signal words — spot it by:</b><br><span class="sig">Why…? Is it…?</span><span class="sig">What…? How…?</span><span class="sig">Two question marks</span><br><span style="font-size:12.5px;opacity:.8">No standard instruction — the questions <i>are</i> the task. Common pairs: Why + positive/negative? What happened + what to do? Do you think + why?</span></div>
+      <div class="model-intro"><b>✦ Model intro (42 words)</b><br><i>“Rural-to-urban migration among youth has accelerated worldwide. This is fuelled by better employment and education in cities. While this brings opportunities, I view the trend as largely negative due to rural decline and urban overcrowding.”</i></div>
+      <div class="trap"><b>⚠ Trap:</b> answering only one question, or answering in the wrong order. Body 1 = Question 1, Body 2 = Question 2. If Q2 asks “positive or negative?”, you <i>must</i> evaluate — don't just describe.</div>
+      <div class="plan-box"><b>📝 5-min plan:</b> Q1 (why): jobs pay more + universities concentrated in cities → example: Vietnam, 70% graduates stay in Hanoi/HCMC. Q2 (evaluation): negative — villages age, cities overcrowd → slums, pressure on housing.</div>
+      <div class="vs"><div class="bad"><b>✕ Band 5</b><br>Writes 250 words on “why” only, ignores “positive or negative?”.</div><div class="good"><b>✓ Band 8</b><br>“Turning to whether this is desirable, I would argue it is detrimental because…”</div></div>
+      <details class="sbs"><summary>📝 Sentence-by-sentence build — Two-part essay (14 sentences, 272 words)</summary><ol>
+        <li><span class="role r-intro">S1 — Background: the phenomenon</span><span class="ex">“Across Asia and Africa, villages are emptying as teenagers board buses for the capital.”</span><span class="why">Concrete image (“board buses”) beats abstract (“migration is increasing”). Hooks a tired examiner.</span></li>
+        <li><span class="role r-intro">S2 — Paraphrase Q1 (why)</span><span class="ex">“This rural exodus is driven by the concentration of jobs and universities in a few megacities.”</span><span class="why">“Young people leave rural areas” → “rural exodus”. Answers Q1's core in noun form upfront.</span></li>
+        <li><span class="role r-intro">S3 — Preview both answers in order</span><span class="ex">“While the pull of opportunity is understandable, I view the trend as largely negative for both villages and cities.”</span><span class="why">Q1 acknowledged (“understandable”) + Q2 verdict (“largely negative”) + scope (“both villages and cities” maps ¶3). Order preserved.</span></li>
+        <li><span class="role r-body">S4 — Body 1 topic: answer Q1 directly</span><span class="ex">“The foremost reason youngsters migrate is economic: cities simply pay more for the same effort.”</span><span class="why">“Foremost reason” signals Q1 has begun. Colon + blunt claim = clear, confident TR.</span></li>
+        <li><span class="role r-body">S5 — Expand with contrast rural vs urban</span><span class="ex">“A shop assistant in Hanoi can earn double her rural wage, alongside overtime and promotion prospects absent at home.”</span><span class="why">Specific job + city + “double” + triple list. Specificity is what makes examples believable.</span></li>
+        <li><span class="role r-body">S6 — Second reason: education + social life</span><span class="ex">“Added to this, top universities, cinemas, and hospitals cluster in capitals, so ambitious school-leavers feel staying means settling.”</span><span class="why">“Added to this” second reason without new paragraph — Q1 stays contained in ¶2. Alliteration “staying means settling” adds flair safely.</span></li>
+        <li><span class="role r-body">S7 — Evidence</span><span class="ex">“In Vietnam, for example, roughly 70% of provincial graduates remain in Hanoi or Ho Chi Minh City after their degrees.”</span><span class="why">Country you know + plausible stat. Examiners accept invented-plausible data; they punish impossible data.</span></li>
+        <li><span class="role r-body">S8 — Close Q1, bridge to Q2</span><span class="ex">“These twin magnets of money and amenities explain the outflow; the question is whether it matters.”</span><span class="why">“Twin magnets” metaphor compresses ¶2; “the question is…” pivots to Q2 with perfect CC.</span></li>
+        <li><span class="role r-body">S9 — Body 2 topic: answer Q2 (evaluation)</span><span class="ex">“Turning to whether this is desirable, I believe the costs outweigh the gains.”</span><span class="why">Explicit bridge phrase + verdict. Examiner checking “did they answer Q2?” finds it in 12 words.</span></li>
+        <li><span class="role r-body">S10 — Cost 1: villages hollowed out</span><span class="ex">“Villages are left with the elderly and children, so farms go untended, festivals fade, and local schools close for lack of pupils.”</span><span class="why">Triple “so…” consequences in one sentence — developed effect, not a label.</span></li>
+        <li><span class="role r-body">S11 — Cost 2: cities overcrowded + example</span><span class="ex">“Meanwhile, arrivals crowd into slums and informal jobs; Manila's fringe settlements, housing over 600,000 newcomers, illustrate the strain on water and transport.”</span><span class="why">“Meanwhile” balances village vs city. Semi-colon + city example shows range.</span></li>
+        <li><span class="role r-body">S12 — Concede the upside, contain it</span><span class="ex">“Admittedly, some migrants remit money and gain degrees, but remittances rarely rebuild schools, and degrees seldom return.”</span><span class="why">“Admittedly… but…” + parallel “rarely/seldom” rebuttal. Concession handled in ONE sentence — Q2 stays negative as promised.</span></li>
+        <li><span class="role r-conc">S13 — Summary: one line per question</span><span class="ex">“In summary, youth leave for better pay and prospects, yet this drains the countryside while overloading cities.”</span><span class="why">Q1 + Q2 each compressed to a clause, in original order. No new content.</span></li>
+        <li><span class="role r-conc">S14 — Recommendation (fits “what can be done” energy)</span><span class="ex">“Governments should therefore seed rural colleges and broadband jobs to rebalance opportunity.”</span><span class="why">“Therefore” + concrete policy pair. Safe close even when Q2 didn't explicitly ask for solutions.</span></li>
+      </ol></details>
+    </div>
+    <div class="q-struct"><b class="mono" style="color:var(--hl-yellow)">PARAGRAPH MAP — ANSWER IN ORDER</b>
+      <div class="para-map">
+        <div class="row"><span class="pn">¶1</span><span><b>Paraphrase both questions</b> + one-line answer to each.</span><span class="wc">45 w</span></div>
+        <div class="row"><span class="pn">¶2</span><span><b>Answer Q1 fully</b> (reasons / what / why) + example.</span><span class="wc">100 w</span></div>
+        <div class="row"><span class="pn">¶3</span><span><b>Answer Q2 fully</b> (evaluation / solution / opinion) + example.</span><span class="wc">100 w</span></div>
+        <div class="row"><span class="pn">¶4</span><span><b>Summarise both answers.</b> One sentence per question.</span><span class="wc">30 w</span></div>
+      </div>
+      <b class="mono" style="color:var(--hl-yellow);font-size:12px">BRIDGE PHRASES — CLICK TO COPY</b>
+      <ul class="thesis-list">
+        <li onclick="copyT(this)"><span>Q1 OPENER</span>The primary reasons for this are… and…</li>
+        <li onclick="copyT(this)"><span>Q2 BRIDGE</span>Turning to whether this trend is beneficial, I believe it is…</li>
+        <li onclick="copyT(this)"><span>SUMMARY</span>In summary, X is driven by… and, despite…, its effects are…</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+
+  <div class="quiz" id="typeQuiz">
+    <h4>⚡ 60-second drill — name the type</h4>
+    <p>Read the instruction line, click the type. This is the exact skill that saves your Task Response score.</p>
+    <div class="quiz-q" data-answer="opinion">
+      <p>Q1. “Some experts believe that children should begin learning a foreign language in primary school. To what extent do you agree or disagree?”</p>
+      <div class="quiz-opts"><button data-v="opinion">Opinion</button><button data-v="discussion">Discussion</button><button data-v="adv">Adv / Disadv</button><button data-v="problem">Problem / Solution</button><button data-v="two">Two-part</button></div>
+      <div class="quiz-feedback"></div>
+    </div>
+    <div class="quiz-q" data-answer="discussion">
+      <p>Q2. “Some people think fast food is responsible for obesity, while others blame lack of exercise. Discuss both views and give your own opinion.”</p>
+      <div class="quiz-opts"><button data-v="opinion">Opinion</button><button data-v="discussion">Discussion</button><button data-v="adv">Adv / Disadv</button><button data-v="problem">Problem / Solution</button><button data-v="two">Two-part</button></div>
+      <div class="quiz-feedback"></div>
+    </div>
+    <div class="quiz-q" data-answer="two">
+      <p>Q3. “In many countries, plastic packaging is harming the environment. Why is this happening, and what can be done to solve it?”</p>
+      <div class="quiz-opts"><button data-v="opinion">Opinion</button><button data-v="discussion">Discussion</button><button data-v="adv">Adv / Disadv</button><button data-v="problem">Problem / Solution</button><button data-v="two">Two-part</button></div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLUEPRINT -->
+<section class="section" id="blueprint">
+  <div class="sec-head">
+    <div><div class="sec-num">03 — The blueprint</div><h2>Four paragraphs. Zero panic.</h2></div>
+    <p>Examiners read hundreds of essays. Give them the shape they expect, then surprise them with ideas. Click each paragraph.</p>
+  </div>
+  <div class="blueprint">
+    <div class="steps">
+      <button class="step-btn active" data-s="0"><b>¶1 — Introduction (40-50 words)</b><span>Paraphrase + thesis + outline • 5 mins</span></button>
+      <button class="step-btn" data-s="1"><b>¶2 — Body 1 (90-100 words)</b><span>PEEL: Point, Explain, Example, Link • 13 mins</span></button>
+      <button class="step-btn" data-s="2"><b>¶3 — Body 2 (90-100 words)</b><span>Strongest argument + concession • 13 mins</span></button>
+      <button class="step-btn" data-s="3"><b>¶4 — Conclusion (30-40 words)</b><span>Restate, don't repeat • 4 mins</span></button>
+      <div style="background:var(--ink);color:#fff;border-radius:14px;padding:14px;font-size:13px"><b>⏱ 5-min plan first:</b> brainstorm 2 ideas per side, pick your 2 strongest, one example each (country, study, statistic — can be invented plausibly).</div>
+    </div>
+    <div class="blue-detail" id="blueDetail"></div>
+  </div>
+</section>
+
+<!-- SAMPLE -->
+<section class="section" id="sample">
+  <div class="sec-head">
+    <div><div class="sec-num">04 — Examiner's red pen</div><h2>A Band 9 essay, dissected.</h2></div>
+    <p>Toggle the highlight layers — this is literally what each band criterion rewards. Hover any highlight for why it scores.</p>
+  </div>
+  <div class="layer-toggles">
+    <button data-layer="tr" class="on">🎯 Task Response</button>
+    <button data-layer="cc" class="on">🔗 Cohesion</button>
+    <button data-layer="lr" class="on">📚 Vocabulary</button>
+    <button data-layer="gra" class="on">✍️ Grammar</button>
+  </div>
+  <div class="essay-layout">
+    <div class="essay-paper" id="essay">
+      <p><mark class="tr" title="TR: clear paraphrase — 'compulsory part' → 'mandatory component', no copying">In recent years, there has been growing debate about whether voluntary work should become a <mark class="lr" title="LR: natural collocation — mandatory component">mandatory component</mark> of secondary education.</mark> <mark class="cc" title="CC: clear signalling — 'While... I believe' frames the whole essay">While some argue that students are already overburdened,</mark> <mark class="tr" title="TR: unmistakable thesis + position maintained throughout">I strongly agree that unpaid community service should be required, as it fosters civic responsibility and improves employability.</mark></p>
+      <p><mark class="cc" title="CC: topic sentence — one central idea per paragraph">Firstly, compulsory volunteering cultivates a sense of social responsibility that classrooms alone cannot instil.</mark> <mark class="gra" title="GRA: complex sentence — relative clause + passive">When teenagers assist at food banks or care homes, they are exposed to inequalities which are often invisible in their daily lives.</mark> <mark class="lr" title="LR: precise collocation — 'first-hand experience', 'empathy and solidarity'">This first-hand experience tends to nurture empathy and a sense of solidarity.</mark> <mark class="gra" title="GRA: evidence + result clause">For example, a 2022 study by the University of Melbourne found that students who completed 40 hours of service were 35% more likely to vote and volunteer as adults.</mark></p>
+      <p><mark class="cc" title="CC: second body with concession — 'Admittedly' shows balance, then rebuttal">Admittedly, critics contend that such schemes place undue pressure on exam-year students.</mark> <mark class="gra" title="GRA: concessive complex sentence — 'Although... , ...'">Although this concern is legitimate, it can be mitigated by scheduling service flexibly at weekends or during holidays.</mark> <mark class="lr" title="LR: less common vocabulary used naturally — 'practical competencies', 'increasingly value'">Moreover, community placements equip young people with practical competencies — teamwork, communication and time management — which employers increasingly value.</mark> <mark class="cc" title="CC: referencing — 'these transferable skills' links back without repetition">These transferable skills often prove as decisive as academic grades in job interviews.</mark></p>
+      <p><mark class="tr" title="TR: conclusion restates position, no new ideas, answers the question directly">In conclusion, despite concerns about workload, I remain convinced that mandatory community service enriches both students and society.</mark> <mark class="lr" title="LR: strong closing collocation">It bridges the gap between academic learning and civic life, producing more engaged and employable citizens.</mark></p>
+      <p class="mono" style="font-size:12px;opacity:.6;border-top:1px dashed var(--line);padding-top:10px">287 WORDS • 4 PARAGRAPHS • AGREE POSITION MAINTAINED THROUGHOUT</p>
+    </div>
+    <aside class="margin-notes">
+      <h4>✎ Examiner margin notes</h4>
+      <div class="note"><b>TR 9:</b> Position crystal-clear from intro to conclusion. Every paragraph supports “strongly agree”.</div>
+      <div class="note"><b>CC 9:</b> Paragraphing logical. Linkers (Firstly, Moreover, Admittedly, Although) never feel mechanical.</div>
+      <div class="note"><b>LR 9:</b> Collocations: <i>mandatory component, nurture empathy, transferable skills, bridge the gap.</i> Zero forcing.</div>
+      <div class="note"><b>GRA 9:</b> Relative clauses, passives, conditionals + concession. Almost error-free; punctuation controls long sentences.</div>
+      <div class="note" style="border-color:#3DD68C"><b>Steal this:</b> intro = paraphrase + opinion + 2 reasons preview. Conclusion = same opinion, new words.</div>
+    </aside>
+  </div>
+</section>
+
+<!-- VOCAB -->
+<section class="section" id="vocab">
+  <div class="sec-head">
+    <div><div class="sec-num">05 — Sound academic, not robotic</div><h2>Upgrade, don't complicate.</h2></div>
+    <p>Band 7+ is not longer words. It's precise collocations. Swap the left column for the right.</p>
+  </div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><h4>✦ Opinions</h4>
+      <div class="swap"><s>I think it is good</s><span class="arrow">→</span><strong>I am convinced that…</strong></div>
+      <div class="swap"><s>Many people say</s><span class="arrow">→</span><strong>It is widely believed that…</strong></div>
+      <div class="swap"><s>In my opinion</s><span class="arrow">→</span><strong>From my perspective…</strong></div>
+    </div>
+    <div class="vocab-card"><h4>✦ Linking & logic</h4>
+      <div class="swap"><s>But / And / So</s><span class="arrow">→</span><strong>However / Moreover / Consequently</strong></div>
+      <div class="swap"><s>Because of this</s><span class="arrow">→</span><strong>This can be attributed to…</strong></div>
+      <div class="swap"><s>On the other hand</s><span class="arrow">→</span><strong>Conversely / In contrast…</strong></div>
+    </div>
+    <div class="vocab-card"><h4>✦ Examples & conclusions</h4>
+      <div class="swap"><s>For example</s><span class="arrow">→</span><strong>For instance / To illustrate…</strong></div>
+      <div class="swap"><s>Big problem</s><span class="arrow">→</span><strong>A pressing concern</strong></div>
+      <div class="swap"><s>In the end</s><span class="arrow">→</span><strong>In conclusion / Taken together…</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- MISTAKES -->
+<section class="section" id="mistakes">
+  <div class="sec-head">
+    <div><div class="sec-num">06 — Don't bleed marks</div><h2>The 6 Band-killers.</h2></div>
+    <p>Each of these alone can cap you at Band 5–6. Check your last essay for them.</p>
+  </div>
+  <div class="sins">
+    <div class="sin"><div class="sin-num">1</div><div><b>Memorised phrases</b><p>Examiners spot “This is a controversial hot topic in modern society” instantly. Paraphrase the actual question.</p><code>✕ In the contemporary era of globalisation…</code><code class="fix">✓ In recent years, working from home has become widespread…</code></div></div>
+    <div class="sin"><div class="sin-num">2</div><div><b>No clear position</b><p>Sitting on the fence in an opinion essay = TR 5. Pick a side in the intro and never wobble.</p><code>✕ There are pros and cons, it depends… (with no verdict)</code><code class="fix">✓ While both have merit, I believe the advantages outweigh…</code></div></div>
+    <div class="sin"><div class="sin-num">3</div><div><b>Listing without extending</b><p>Three half-ideas score less than two fully developed ones. Explain → example → result.</p><code>✕ Firstly pollution, secondly stress, thirdly cost…</code><code class="fix">✓ One cause + why it happens + its effect + example.</code></div></div>
+    <div class="sin"><div class="sin-num">4</div><div><b>Over-linking</b><p>Starting every sentence with Moreover / Furthermore looks mechanical. Use referencing too.</p><code>✕ Furthermore… Furthermore… Moreover…</code><code class="fix">✓ This trend… These measures… Such policies…</code></div></div>
+    <div class="sin"><div class="sin-num">5</div><div><b>Under length (under 250 words)</b><p>Automatic TR penalty — and you can't develop ideas in 180 words. Aim 260–290.</p><code>✕ 212 words = task not achieved</code><code class="fix">✓ Count in practice. ~13-15 sentences ≈ 270 words.</code></div></div>
+    <div class="sin"><div class="sin-num">6</div><div><b>Informal / emotional tone</b><p>No contractions, slang, or exclamation. Academic = calm and objective.</p><code>✕ Kids nowadays are lazy!!! Don't you agree?</code><code class="fix">✓ Some argue that young people lack motivation…</code></div></div>
+  </div>
+</section>
+
+<!-- TOOLKIT -->
+<section class="section" id="toolkit">
+  <div class="sec-head">
+    <div><div class="sec-num">07 — Practice toolkit</div><h2>Write one now. Properly.</h2></div>
+    <p>40 – 5 – 30 – 5: 5 min plan, 30 min write, 5 min check. Use the tools below.</p>
+  </div>
+  <div class="tools">
+    <div class="tool-card">
+      <h3>① Word counter</h3>
+      <p style="font-size:14px;opacity:.7">Paste your essay. Target 260–290 words.</p>
+      <textarea id="essayInput" placeholder="Paste or type your Task 2 essay here…"></textarea>
+      <div class="counter-stats"><div><b id="wCount">0</b><span class="mono" style="font-size:11px">WORDS</span></div><div><b id="sCount">0</b><span class="mono" style="font-size:11px">SENTENCES</span></div><div><b id="pCount">0</b><span class="mono" style="font-size:11px">PARAS</span></div></div>
+      <p id="wWarn" class="mono" style="font-size:12px;font-weight:600"></p>
+    </div>
+    <div class="tool-card">
+      <h3>② Exam checklist</h3>
+      <p style="font-size:14px;opacity:.7">Tick honestly. 8/8 = ready to book the test.</p>
+      <div class="check" id="checklist">
+        <label><input type="checkbox"> Paraphrased the question (no copied chunks)</label>
+        <label><input type="checkbox"> Clear thesis / opinion in introduction</label>
+        <label><input type="checkbox"> 2 body paragraphs, one idea each</label>
+        <label><input type="checkbox"> Each idea has explanation + example</label>
+        <label><input type="checkbox"> Conclusion restates (no new ideas)</label>
+        <label><input type="checkbox"> 250+ words, 4–5 paragraphs</label>
+        <label><input type="checkbox"> Mix of simple + complex sentences</label>
+        <label><input type="checkbox"> Checked spelling, articles (a/the), plurals</label>
+      </div>
+      <div id="scoreBar"><div id="scoreFill"></div></div>
+      <p class="mono" id="scoreLabel" style="font-size:12px;font-weight:600">0 / 8 — KEEP GOING</p>
+    </div>
+    <div class="tool-card" style="background:var(--ink);color:#fff;border-color:var(--ink)">
+      <h3>③ Sentence bank</h3>
+      <p style="font-size:14px;opacity:.7">Click any starter to copy it.</p>
+      <div id="bank" style="display:flex;flex-direction:column;gap:8px"></div>
+      <p class="mono" id="copyMsg" style="font-size:12px;color:var(--hl-yellow);min-height:18px"></p>
+      <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:12px;font-size:13px;margin-top:8px"><b>PEEL reminder:</b> <b>P</b>oint → <b>E</b>xplain why → <b>E</b>xample → <b>L</b>ink back to question.</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div class="foot-in">
+    <div>
+      <h2>One essay a week beats ten tips a day.</h2>
+      <p>Pick a past prompt, time 40 minutes, count your words, run the checklist. Bring this page back each time until the structure is automatic.</p>
+      <div class="cta-row">
+        <button class="btn btn-gold" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top ↑</button>
+        <button class="btn" style="border:1.5px solid #fff;color:#fff" onclick="resetTimer();document.querySelector('.exam-card').scrollIntoView({behavior:'smooth',block:'center'})">Start a 40-min practice</button>
+      </div>
+      <p class="mono" style="font-size:11px;letter-spacing:.1em;margin-top:18px;opacity:.5">BUILT FOR SELF-STUDY • ACADEMIC & GENERAL TRAINING TASK 2 • GOOD LUCK — YOU'VE GOT THIS.</p>
+    </div>
+    <div style="background:#fff;color:var(--ink);border-radius:18px;padding:22px">
+      <b class="mono" style="font-size:12px;letter-spacing:.12em">5-DAY SPRINT PLAN</b>
+      <ol style="font-size:14px;padding-left:20px">
+        <li><b>Day 1:</b> Opinion essay — agree/disagree</li>
+        <li><b>Day 2:</b> Discussion essay — both views</li>
+        <li><b>Day 3:</b> Rewrite Day 1 with upgraded vocab</li>
+        <li><b>Day 4:</b> Timed essay, no dictionary</li>
+        <li><b>Day 5:</b> Self-mark with the checklist above</li>
+      </ol>
+    </div>
+  </div>
+</footer>
+
+<script>
+// progress
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('progress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+},{passive:true});
+
+// tabs
+document.querySelectorAll('#tabs .tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('#tabs .tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.qpanel').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById('q-'+t.dataset.q).classList.add('active');
+}));
+
+// blueprint
+const blueData=[
+ {t:"Introduction — the 3-sentence opener",f:"General statement → Paraphrase → Thesis + outline",d:"Sentence 1: general background. Sentence 2: paraphrase the question with synonyms (never copy). Sentence 3: your answer + map of the essay.",ex:"❝ The rise of remote work has sparked debate. While some claim offices will vanish, I believe hybrid work will dominate because it balances productivity and wellbeing. This essay will outline both benefits and drawbacks before presenting my view. ❝",chips:["It is often argued that…","In recent years, X has become…","This essay will argue that…","While some believe…, I maintain that…"]},
+ {t:"Body 1 — develop ONE idea fully",f:"P.E.E.L. → Point • Explain • Example • Link",d:"Topic sentence states the idea. Explain WHY it is true (2-3 sentences). Add a concrete example (study, country, statistic). Final sentence links back to the question.",ex:"❝ Firstly, remote work raises productivity. Employees save commuting time and can design quiet workspaces, which improves focus. For instance, a Stanford trial of 16,000 workers found a 13% output rise. Hence, flexibility directly boosts efficiency. ❝",chips:["Firstly, / To begin with…","This is because…","To illustrate, …","Consequently, …"]},
+ {t:"Body 2 — your strongest card + concession",f:"Concede → Rebut → Strong argument → Example",d:"Start by acknowledging the other side briefly (Admittedly…), then rebut and deliver your strongest reason. Examiners reward this maturity with higher TR/CC.",ex:"❝ Admittedly, isolation is a risk. However, this can be offset by scheduled office days. More importantly, remote work widens access — disabled professionals and rural workers can now compete equally, which strengthens the labour market as a whole. ❝",chips:["Admittedly, … However, …","Despite this, …","More importantly, …","This demonstrates that…"]},
+ {t:"Conclusion — mirror, don't copy",f:"Restate opinion → Summarise 2 reasons → (optional) recommendation",d:"No new arguments. Rephrase your thesis with different words and compress both body ideas into one sentence. 2-3 sentences max.",ex:"❝ In conclusion, although remote work has drawbacks, I remain convinced its advantages — higher productivity and wider inclusion — outweigh them. Employers should therefore formalise hybrid policies. ❝",chips:["In conclusion, …","Taken together, …","For these reasons, I believe…","It is therefore recommended that…"]}
+];
+const blueDetail=document.getElementById('blueDetail');
+function renderBlue(i){
+  document.querySelectorAll('.step-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  const d=blueData[i];
+  blueDetail.innerHTML=`<h3>${d.t}</h3><div class="formula">FORMULA: ${d.f}</div><p>${d.d}</p><p style="background:var(--paper-2);border-radius:12px;padding:14px;font-size:14.5px">${d.ex}</p><div class="starter-chips">${d.chips.map(c=>`<span title="Click to copy" onclick="navigator.clipboard&&navigator.clipboard.writeText('${c.replace(/'/g,"\\'")}')">${c}</span>`).join('')}</div>`;
+}
+document.querySelectorAll('.step-btn').forEach(b=>b.addEventListener('click',()=>renderBlue(+b.dataset.s)));
+renderBlue(0);
+
+// annotation toggles
+document.querySelectorAll('.layer-toggles button').forEach(b=>b.addEventListener('click',()=>{
+  b.classList.toggle('on');
+  const layer=b.dataset.layer, on=b.classList.contains('on');
+  document.querySelectorAll(`mark.${layer}`).forEach(m=>m.classList.toggle('dim',!on));
+}));
+
+// timer
+let secs=40*60, ticking=null;
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function drawTimer(){document.getElementById('timerDisplay').textContent=fmt(secs);document.getElementById('heroTimerLabel').textContent=fmt(secs);}
+function toggleTimer(){
+  const btn=document.getElementById('timerBtn');
+  if(ticking){clearInterval(ticking);ticking=null;btn.textContent='Resume';return}
+  btn.textContent='Pause';
+  ticking=setInterval(()=>{if(secs>0){secs--;drawTimer()}else{clearInterval(ticking);ticking=null;document.getElementById('timerBtn').textContent='Done ✓';alert("Time! Pens down — now spend 5 minutes checking articles, plurals and spelling.")}},1000);
+}
+function resetTimer(){clearInterval(ticking);ticking=null;secs=40*60;drawTimer();document.getElementById('timerBtn').textContent='Start';}
+
+// word counter
+const ta=document.getElementById('essayInput');
+ta.addEventListener('input',()=>{
+  const txt=ta.value.trim();
+  const w=txt?txt.split(/\s+/).length:0;
+  const s=txt?txt.split(/[.!?]+/).filter(x=>x.trim().length).length:0;
+  const p=txt?txt.split(/\n\s*\n/).filter(x=>x.trim().length).length||(txt?1:0):0;
+  document.getElementById('wCount').textContent=w;
+  document.getElementById('sCount').textContent=s;
+  document.getElementById('pCount').textContent=p;
+  const warn=document.getElementById('wWarn');
+  if(w===0){warn.textContent='';}
+  else if(w<250){warn.textContent=`⚠ ${250-w} WORDS SHORT — UNDER LENGTH PENALTY`;warn.style.color='var(--red)';}
+  else if(w<=290){warn.textContent='✓ PERFECT LENGTH — BAND-SAFE ZONE';warn.style.color='var(--green)';}
+  else if(w<=320){warn.textContent='✓ OK BUT TIGHTEN — RISK OF ERRORS';warn.style.color='#8A6D00';}
+  else{warn.textContent='⚠ TOO LONG — MORE WORDS, MORE ERRORS';warn.style.color='var(--red)';}
+});
+
+// checklist
+const boxes=document.querySelectorAll('#checklist input');
+boxes.forEach(b=>b.addEventListener('change',()=>{
+  const n=[...boxes].filter(x=>x.checked).length;
+  document.getElementById('scoreFill').style.width=(n/8*100)+'%';
+  const l=document.getElementById('scoreLabel');
+  l.textContent=`${n} / 8 — `+(n<4?'KEEP GOING':n<6?'SOLID DRAFT':n<8?'ALMOST THERE':'EXAM-READY ✓');
+}));
+
+// thesis copy + quiz
+function copyT(el){
+  const txt=el.textContent;
+  if(navigator.clipboard) navigator.clipboard.writeText(txt);
+  const old=el.style.background;
+  el.style.background='rgba(255,201,60,.35)';
+  setTimeout(()=>el.style.background=old,600);
+}
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  const ans=q.dataset.answer, fb=q.querySelector('.quiz-feedback');
+  q.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    q.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));
+    if(b.dataset.v===ans){b.classList.add('correct');fb.textContent='✓ Correct — now check the matching tab above for its full structure.';fb.style.color='#3DD68C';}
+    else{b.classList.add('wrong');q.querySelector(`button[data-v="${ans}"]`).classList.add('correct');fb.textContent='✕ Not quite — the highlighted answer is the correct type. Re-read its signal words.';fb.style.color='#FF8A7A';}
+  }));
+});
+
+// sentence bank
+const bank=["While some argue that…, I believe…","This essay will discuss… before concluding that…","Firstly, the most compelling reason is…","This is largely because…","To illustrate, a recent study showed…","Admittedly, critics point out that…","However, this concern can be mitigated by…","In contrast, …","Consequently, …","In conclusion, despite…, I remain convinced that…"];const bankEl=document.getElementById('bank');
+bank.forEach(s=>{
+  const b=document.createElement('button');
+  b.textContent='⧉ '+s;
+  b.style.cssText='text-align:left;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:10px 12px;font-size:13.5px;cursor:pointer';
+  b.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(s);document.getElementById('copyMsg').textContent='✓ Copied: “'+s.slice(0,40)+'…”';setTimeout(()=>document.getElementById('copyMsg').textContent='',1800)};
+  b.onmouseenter=()=>b.style.background='rgba(255,201,60,.2)';
+  b.onmouseleave=()=>b.style.background='rgba(255,255,255,.08)';
+  bankEl.appendChild(b);
+});
+</script>
+</body>
+</html>
